@@ -1,0 +1,70 @@
+// For format details, see https://aka.ms/devcontainer.json. For config options, see the
+// README at: https://github.com/devcontainers/templates/tree/main/src/docker-existing-docker-compose
+{
+	"name": "Existing Docker Compose (Extend)",
+
+	// Update the 'dockerComposeFile' list if you have more compose files or use different names.
+	// The .devcontainer/docker-compose.yml file contains any overrides you need/want to make.
+	"dockerComposeFile": [
+		"../docker-compose.yaml",
+		"docker-compose.yml"
+	],
+
+	"runArgs": [
+		"--privileged",
+		"--device=/dev/bus/usb",  // adjust path
+		"--volume=/dev/bus/usb:/dev/bus/usb"
+	],
+	"mounts": [
+		"source=/dev/bus/usb,target=/dev/bus/usb,type=bind"
+	],
+
+	// The 'service' property is the name of the service for the container that VS Code should
+	// use. Update this value and .devcontainer/docker-compose.yml to the real service name.
+	"service": "sas-development",  
+
+	// The optional 'workspaceFolder' property is the path VS Code should open by default when
+	// connected. This is typically a file mount in .devcontainer/docker-compose.yml
+	"workspaceFolder": "/work/smoke_programmer",
+
+	// Features to add to the dev container. More info: https://containers.dev/features.
+	// "features": {},
+
+	// Use 'forwardPorts' to make a list of ports inside the container available locally.
+	// "forwardPorts": [],
+
+	// Uncomment the next line if you want start specific services in your Docker Compose config.
+	// "runServices": [],
+
+	// Uncomment the next line if you want to keep your containers running after VS Code shuts down.
+	// "shutdownAction": "none",
+
+	// Configure tool-specific properties.
+	"customizations": {
+		"vscode": {
+			"extensions": [
+				"ms-vscode.cmake-tools",
+				"matepek.vscode-catch2-test-adapter",
+				"ms-vscode.cpptools",
+				"ms-vscode.cpptools-extension-pack",
+				"webfreak.debug",
+				"Gxl.git-graph-3",
+                "mhutchie.git-graph",
+                "spmeesseman.vscode-taskexplorer",
+                "mcu-debug.debug-tracker-vscode",
+                "marus25.cortex-debug",
+                "twxs.cmake"
+			],
+			"terminal.integrated.defaultProfile.linux": "bash"
+		}
+	},
+
+	"containerEnv": {
+		"SHELL": "/bin/bash"
+	},
+
+	// Uncomment to connect as an existing user other than the container default. More info: https://aka.ms/dev-containers-non-root.
+	"remoteUser": "USER",
+	"updateRemoteUserUID": false
+}
+

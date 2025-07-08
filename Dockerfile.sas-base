@@ -1,0 +1,37 @@
+FROM ubuntu-base AS sas-base
+
+ARG GIT_USERNAME=${GIT_USERNAME}
+ARG GIT_PASSWORD=${GIT_PASSWORD}
+ENV GIT_USERNAME=$GIT_USERNAME
+ENV GIT_PASSWORD=$GIT_PASSWORD
+
+ARG SAS_USERNAME=${SAS_USERNAME}
+ARG SAS_PASSWORD=${SAS_PASSWORD}
+ENV SAS_USERNAME=$SAS_USERNAME
+ENV SAS_PASSWORD=$SAS_PASSWORD
+
+ARG MODE=${MODE}
+ENV MODE=$MODE
+
+ARG WDIR=work
+
+
+WORKDIR /${WDIR}
+
+# Clone project
+RUN \
+git clone https://github.com/RaphNLab/RE46C109_Programmer ./smoke_programmer && \
+  cd ./smoke_programmer && \
+  git checkout develop
+
+# Create a new user with a home directory
+RUN useradd -m -s /bin/bash $SAS_USERNAME
+
+# Add user to the sudo group
+RUN usermod -aG sudo $SAS_USERNAME
+RUN sudo usermod -aG dialout $SAS_USERNAME
+
+# (Optional) Allow passwordless sudo for users in the sudo group
+RUN echo '%sudo ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
+
+RUN chown -R $SAS_USERNAME:$SAS_PASSWORD /${WDIR}
