@@ -36,7 +36,6 @@ RUN \
     git clone https://github.com/RaphNLab/RE46C109_Programmer ./smoke_programmer && \
     cd ./smoke_programmer && \
     git checkout develop && \
-    rm -r build && \
     cmake -B build -DCMAKE_TOOLCHAIN_FILE=cmake/arm-gcc-toolchain.cmake
 
 
