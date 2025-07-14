@@ -3,10 +3,7 @@
 ####################################################################
 FROM sas-base AS sas-development
 
-ARG GIT_FULL_NAME=${GIT_FULL_NAME}
-ARG GIT_EMAIL=${GIT_EMAIL}
-ENV GIT_FULL_NAME=$GIT_FULL_NAME
-ENV GIT_EMAIL=$GIT_EMAIL
+ENV UDEV=1
 
 USER root
 RUN \
@@ -19,9 +16,11 @@ RUN \
     openocd \
     gdb-multiarch \
     make \
-    libusb-1.0-0-dev \
     git \
     python3
+
+
+USER $SAS_USERNAME
 
 # create a directory for the project
 RUN \
@@ -29,8 +28,16 @@ RUN \
     cd /work && \
     git clone https://github.com/libopencm3/libopencm3 && \
     cd /work/libopencm3 && \
-    make
+    make TARGETS=stm32/l1
 
-USER $SAS_USERNAME
-RUN git config --global user.name $GIT_FULL_NAME &&\
-    git config --global user.email $GIT_EMAIL
+
+# Clone project
+RUN \
+    git clone https://github.com/RaphNLab/RE46C109_Programmer ./smoke_programmer && \
+    cd ./smoke_programmer && \
+    git checkout develop && \
+    rm -r build && \
+    cmake -B build -DCMAKE_TOOLCHAIN_FILE=cmake/arm-gcc-toolchain.cmake
+
+
+
