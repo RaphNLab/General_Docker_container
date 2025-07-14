@@ -13,10 +13,5 @@ services:
       dockerfile: Dockerfile
       target: sas-development
       args:
-        - GIT_USERNAME=${GIT_USERNAME}
-        - GIT_PASSWORD=${GIT_PASSWORD}
-        - GIT_FULL_NAME=${GIT_FULL_NAME}
-        - GIT_EMAIL=${GIT_EMAIL}
         - SAS_USERNAME=${SAS_USERNAME}
         - SAS_PASSWORD=${SAS_PASSWORD}
-        - MODE=${MODE}

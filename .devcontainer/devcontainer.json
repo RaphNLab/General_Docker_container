@@ -9,15 +9,10 @@
 		"../docker-compose.yaml",
 		"docker-compose.yml"
 	],
-
-	"runArgs": [
-		"--privileged",
-		"--device=/dev/bus/usb",  // adjust path
-		"--volume=/dev/bus/usb:/dev/bus/usb"
-	],
-	"mounts": [
-		"source=/dev/bus/usb,target=/dev/bus/usb,type=bind"
-	],
+	
+	// "mounts": [
+	// 	"type=bind,source=/dev/bus/usb,target=/dev/bus/usb"
+	// ],
 
 	// The 'service' property is the name of the service for the container that VS Code should
 	// use. Update this value and .devcontainer/docker-compose.yml to the real service name.
