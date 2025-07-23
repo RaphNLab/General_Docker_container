@@ -15,7 +15,7 @@ USER root
 RUN useradd -m -s /bin/bash $SAS_USERNAME
 
 # Add user to the sudo group
-RUN usermod -aG sudo $SAS_USERNAME
+RUN usermod -aG root $SAS_USERNAME
 RUN usermod -aG dialout $SAS_USERNAME
 RUN usermod -aG plugdev $SAS_USERNAME
 
