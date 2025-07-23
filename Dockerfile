@@ -20,7 +20,7 @@ RUN \
     python3
 
 
-# USER $SAS_USERNAME
+USER $SAS_USERNAME
 
 # create a directory for the project
 RUN \
