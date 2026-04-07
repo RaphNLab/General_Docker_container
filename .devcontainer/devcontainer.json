@@ -48,7 +48,9 @@
                 "spmeesseman.vscode-taskexplorer",
                 "mcu-debug.debug-tracker-vscode",
                 "marus25.cortex-debug",
-                "twxs.cmake"
+                "twxs.cmake",
+				"eclipse-cdt.memory-inspector",
+				"mcu-debug.rtos-views"
 			],
 			"terminal.integrated.defaultProfile.linux": "bash"
 		}
